@@ -21,13 +21,13 @@ run: $(DST_BIN)
 
 .SECONDEXPANSION:
 
-$(DST_LICENSE): LICENSE
+$(DST_LICENSE): LICENSE | $$(@D)
 	cp $< $@
 
-$(DST_README): README.md
+$(DST_README): README.md | $$(@D)
 	cp $< $@
 
-$(DST_BIN): $(OBJECTS) $(LIB_LINK)
+$(DST_BIN): $(OBJECTS) $(LIB_LINK) | $$(@D)
 	clang -std=c11 -o $@ $^
 
 build/%.o: src/%.c | $$(@D)/.keep
